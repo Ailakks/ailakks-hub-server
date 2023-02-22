@@ -7,7 +7,6 @@ export class PlaylistController {
 
   @Get()
   async get(@Res() response, @Query('code') code: string) {
-    console.log(code)
     return response.status(HttpStatus.OK).json(await this.playlistService.playlist(code));
   }
 }

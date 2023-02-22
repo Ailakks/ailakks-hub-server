@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import axios from 'axios';
-import { urlencoded } from "express";
 
 @Injectable()
 export class SpotifyService {
@@ -10,9 +9,8 @@ export class SpotifyService {
     formData.append('client_id', process.env.SPOTIFY_CLIENT_ID);
     formData.append('client_secret', process.env.SPOTIFY_CLIENT_SECRET);
     formData.append('code', code);
-    formData.append('code', code);
     formData.append('grant_type', 'authorization_code')
-    formData.append('redirect_url', 'http://localhost:3001/ailakks-hub/music');
+    formData.append('redirect_uri', 'http://localhost:3001/ailakks-hub/music');
 
     const response = await axios.post("https://accounts.spotify.com/api/token", formData, {
       headers: {
@@ -20,7 +18,6 @@ export class SpotifyService {
       }
     }).catch((error) => console.log(error));
 
-    console.log(response)
-    return "a";
+    return response["data"].access_token;
   }
 }

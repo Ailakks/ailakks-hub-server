@@ -8,12 +8,11 @@ export class PlaylistService {
 
   async playlist(code: string) {
     const token = await this.spotifyService.getToken(code);
-    console.log(token)
 
     const response = await axios.get(process.env.SPOTIFY_PLAYLIST_ENDPOINT,
-      { headers: { Authorization: `Bearer ${"a"}` }});
+      { headers: { Authorization: `Bearer ${token}` }});
 
 
-    return response.data;
+    return { token: token, data: response.data };
   }
 }
