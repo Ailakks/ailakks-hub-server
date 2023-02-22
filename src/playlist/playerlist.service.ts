@@ -1,12 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import axios from 'axios';
+import { SpotifyService } from "../spotify/spotify.service";
 
 @Injectable()
 export class PlaylistService {
-  constructor() {}
-  async playlist() {
+  constructor(private readonly spotifyService: SpotifyService) { }
+
+  async playlist(code: string) {
     const response = await axios.get(process.env.SPOTIFY_PLAYLIST_ENDPOINT,
-      { headers: { Authorization: `Bearer ${process.env.SPOTIFY_API_KEY}` }});
+      { headers: { Authorization: `Bearer ${await this.spotifyService.getToken(code)}` }});
 
     return response.data;
   }
