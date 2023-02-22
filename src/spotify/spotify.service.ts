@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from "@nestjs/common";
 import axios from 'axios';
 
 @Injectable()
@@ -18,6 +18,10 @@ export class SpotifyService {
       }
     }).catch((error) => console.log(error));
 
-    return response["data"].access_token;
+    if (!response) {
+      throw new UnauthorizedException("Invalid code");
+    }
+
+    return response.data.access_token;
   }
 }
