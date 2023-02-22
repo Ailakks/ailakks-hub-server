@@ -6,7 +6,7 @@ export class PlaylistController {
   constructor(private readonly playlistService: PlaylistService) {}
 
   @Get()
-  async get(@Res() response, @Query('code') code: string) {
-    return response.status(HttpStatus.OK).json(await this.playlistService.playlist(code));
+  async get(@Res() response, @Query('token') token: string) {
+    return response.status(HttpStatus.OK).json(await this.playlistService.playlist(token));
   }
 }
