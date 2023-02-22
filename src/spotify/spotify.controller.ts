@@ -7,6 +7,6 @@ export class SpotifyController {
 
   @Get()
   async get(@Res() response, @Query('code') code: string) {
-    return response.status(HttpStatus.OK).json(await this.spotifyService.getToken(code));
+    return response.status(HttpStatus.OK).json({ token: await this.spotifyService.getToken(code) });
   }
 }

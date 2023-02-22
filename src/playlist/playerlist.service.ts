@@ -10,6 +10,6 @@ export class PlaylistService {
       { headers: { Authorization: `Bearer ${token}` }});
 
 
-    return { token: token, data: response.data };
+    return response.data;
   }
 }
