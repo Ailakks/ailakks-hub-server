@@ -10,7 +10,7 @@ export class SpotifyService {
     formData.append('client_secret', process.env.SPOTIFY_CLIENT_SECRET);
     formData.append('code', code);
     formData.append('grant_type', 'authorization_code')
-    formData.append('redirect_uri', 'http://localhost:3001/ailakks-hub/music');
+    formData.append('redirect_uri', process.env.SPOTIFY_REDIRECT_URI);
 
     const response = await axios.post("https://accounts.spotify.com/api/token", formData, {
       headers: {
